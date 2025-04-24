@@ -1,0 +1,12 @@
+[project]
+name = "video-feed-crawler"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "celery>=5.5.1",
+    "dotenv>=0.9.9",
+    "pymongo>=4.12.0",
+    "selenium>=4.31.0",
+]

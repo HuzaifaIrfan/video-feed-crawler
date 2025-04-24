@@ -1,0 +1,24 @@
+ARG UV_VERSION=0.6.14
+ARG DISTRO_VERSION=jammy
+
+
+FROM ghcr.io/astral-sh/uv:$UV_VERSION AS uv
+
+
+FROM mcr.microsoft.com/vscode/devcontainers/base:$DISTRO_VERSION
+LABEL maintainer="HuzaifaIrfan <contact@huzaifairfan.com>"
+
+
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    # For OpenCV etc...
+    libgl1 libglib2.0-0 \
+    # To remove the image size, it is recommended refresh the package cache as follows
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=uv --chown=vscode: /uv /uvx /bin/
+
+RUN mkdir -p /home/vscode/.cache/uv && \
+    chown -R vscode:vscode /home/vscode/.cache
