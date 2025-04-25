@@ -10,6 +10,8 @@ services:
     environment:
       - UV_LINK_MODE=copy
       - SELENIUM_URL=http://selenium_chrome:4444/wd/hub
+      - MONGODB_URI=mongodb://mongodb:27017/
+      - DATABASE=video_feed_crawler
       
     extra_hosts:
       - "host.docker.internal:host-gateway"
