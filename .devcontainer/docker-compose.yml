@@ -9,7 +9,7 @@ services:
 
     environment:
       - UV_LINK_MODE=copy
-      - SELENIUM_URL=http://host.docker.internal:4444/wd/hub
+      - SELENIUM_URL=http://selenium_chrome:4444/wd/hub
       
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -18,6 +18,15 @@ services:
       - uv-vscode-cache:/home/vscode/.cache/uv
       
     command: /bin/sh -c "while sleep 1000; do :; done"
+
+
+  selenium_chrome:
+    image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: "2g"
+
 
 volumes:
   uv-vscode-cache:
