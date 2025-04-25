@@ -11,6 +11,9 @@ def main():
     
     for video in videos:
         Database().insert_video(video["uid"],video["title"],video["img"])
+        
+        
+    # Database().clean()
 
     
 

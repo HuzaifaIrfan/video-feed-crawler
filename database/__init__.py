@@ -34,48 +34,57 @@ class Database:
             
             self.client = MongoClient(MONGODB_URI)
             self.db = self.client[DATABASE]
+            self.pages_collection=self.get_pages_collection()       
             self.videos_collection=self.get_videos_collection()
-            self.pages_collection=self.get_pages_collection()
-            
 
-        
-    
-    def get_videos_collection(self) -> Collection:
-        collection_name = "videos"
-        if collection_name not in self.db.list_collection_names():
-            self.db.create_collection(collection_name)
-
-        videos_collection = self.db[collection_name]
-        
-
-        # Ensure the compound index exists
-        index_name = "cat_1_created_at_-1"
-        existing_indexes = videos_collection.index_information()
-
-        if index_name not in existing_indexes:
-            videos_collection.create_index([("cat", ASCENDING), ("created_at", DESCENDING)], name=index_name)
-
-        print(f"Collection '{collection_name}' and index are ready.")
-        
-        return videos_collection
                 
     def get_pages_collection(self) -> Collection:
         collection_name = "pages"
         if collection_name not in self.db.list_collection_names():
             self.db.create_collection(collection_name)
 
-        pages_collection = self.db[collection_name]
+        self.pages_collection = self.db[collection_name]
 
         # Ensure the compound index exists
         index_name = "cat_1_created_at_-1"
-        existing_indexes = pages_collection.index_information()
+        existing_indexes = self.pages_collection.index_information()
 
         if index_name not in existing_indexes:
-            pages_collection.create_index([("cat", ASCENDING), ("created_at", DESCENDING)], name=index_name)
+            self.pages_collection.create_index([("cat", ASCENDING), ("created_at", DESCENDING)], name=index_name)
 
         print(f"Collection '{collection_name}' and index are ready.")
         
-        return pages_collection
+        return self.pages_collection
+    
+    
+    def get_videos_collection(self) -> Collection:
+        collection_name = "videos"
+        if collection_name not in self.db.list_collection_names():
+            self.db.create_collection(collection_name)
+
+        self.videos_collection = self.db[collection_name]
+        
+
+        # Ensure the compound index exists
+        index_name = "cat_1_created_at_-1"
+        existing_indexes = self.videos_collection.index_information()
+
+        if index_name not in existing_indexes:
+            self.videos_collection.create_index([("cat", ASCENDING), ("created_at", DESCENDING)], name=index_name)
+
+        print(f"Collection '{collection_name}' and index are ready.")
+        
+        return self.videos_collection
+    
+    def clean(self):
+        
+        self.pages_collection.drop()
+        self.videos_collection.drop()
+        
+        self.pages_collection=self.get_pages_collection()       
+        self.videos_collection=self.get_videos_collection()
+
+        
     
 
     def insert_page(self,title:str,link:str,site:int=0,cat:int=0):
