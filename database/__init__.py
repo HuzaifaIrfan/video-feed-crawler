@@ -101,7 +101,7 @@ class Database:
         return page_id
     
     
-    def insert_video(self,uid:str,title:str,img_src:str,site:int=0,cat:int=0):
+    def insert_video(self,uid:str,title:str,img:str,site:int=0,cat:int=0):
         
         if not uid:
             return None
@@ -109,13 +109,13 @@ class Database:
         if not title:
             return None
         
-        if not img_src:
+        if not img:
             return None
         
         video={
             "_id": uid,
             "title":title,
-            "img":img_src,
+            "img":img,
             "site":site,
             "cat":cat
         }
