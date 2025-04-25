@@ -1,7 +1,13 @@
 # Use a Python image with uv pre-installed
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
-RUN apt update
-RUN apt install -y python3-pyqt5
+FROM ghcr.io/astral-sh/uv:0.6.16-python3.13-bookworm-slim
+
+# RUN apt-get update \
+#     && apt-get install -y \
+#     # For PYQT5 etc...
+#     python3-pyqt5\
+#     # To remove the image size, it is recommended refresh the package cache as follows
+#     && apt-get clean \
+#     && rm -rf /var/lib/apt/lists/*
 
 # Install the project into `/app`
 WORKDIR /app

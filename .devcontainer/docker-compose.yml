@@ -1,0 +1,24 @@
+services:
+  video_feed_crawler-dev:
+    container_name: video_feed_crawler-dev
+    build:
+      context: .
+      dockerfile: dockerfile
+      tags:
+        - "localhost:5000/video_feed_crawler-dev:1.0"
+
+    environment:
+      - UV_LINK_MODE=copy
+      - SELENIUM_URL=http://host.docker.internal:4444/wd/hub
+      
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    volumes:
+      - uv-vscode-cache:/home/vscode/.cache/uv
+      
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  uv-vscode-cache:
+    driver: local

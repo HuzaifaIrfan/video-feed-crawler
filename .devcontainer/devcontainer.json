@@ -1,26 +1,20 @@
 {
 	"name": "video_feed_crawler-dev",
-	"build": {
-		"dockerfile": "dockerfile"
-	},
+
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "video_feed_crawler-dev",
+
+	"workspaceFolder": "/workspace",
+	"shutdownAction": "stopCompose",
+
 	"mounts": [
-		"source=uv-vscode-cache,target=/home/vscode/.cache/uv,type=volume"
-		//   "source=uv-cache,target=/root/.cache/uv,type=volume"
+		"source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
 	],
-	"runArgs": [
-		"--add-host=host.docker.internal:host-gateway"
-	],
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"containerEnv": {
-		"UV_LINK_MODE": "copy",
-		"SELENIUM_URL": "http://host.docker.internal:4444/wd/hub"
-	},
-	// "postCreateCommand": "uv sync --frozen",
-	// "postStartCommand": "uv run main.py",
+
+
+	"postCreateCommand": "uv sync --frozen",
+	"postStartCommand": "uv run main.py",
+	
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
@@ -30,5 +24,6 @@
 		}
 	},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"containerUser": "vscode"
 }

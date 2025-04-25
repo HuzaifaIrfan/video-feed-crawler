@@ -1,11 +1,12 @@
 services:
-  video_feed_crawler-prod:
-    # Build the image from the Dockerfile in the current directory
-    container_name: video_feed_crawler-prod
+  video_feed_crawler:
+    container_name: video_feed_crawler
     build:
       context: .
       dockerfile: dockerfile
       tags:
-        - "localhost:5000/video_feed_crawler-prod:1.0"
-    
-    command: ["uv", "run", "main.py"]
+        - "localhost:5000/video_feed_crawler:1.0"
+
+    image: "localhost:5000/video_feed_crawler:1.0"
+
+    command: uv run main.py
