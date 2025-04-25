@@ -27,7 +27,18 @@ services:
       - "7900:7900"
     shm_size: "2g"
 
+  mongodb:
+    container_name: mongodb
+    image: mongo:8-noble
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
+    restart: unless-stopped 
+
 
 volumes:
+  mongodb:
+    driver: local
   uv-vscode-cache:
     driver: local
