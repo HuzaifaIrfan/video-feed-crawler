@@ -19,6 +19,9 @@ services:
       
     command: /bin/sh -c "while sleep 1000; do :; done"
 
+    depends_on:
+      - selenium_chrome
+      - mongodb
 
   selenium_chrome:
     image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
