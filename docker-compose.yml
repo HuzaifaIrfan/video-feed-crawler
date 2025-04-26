@@ -60,5 +60,3 @@ volumes:
     driver: local
   mongodb:
     driver: local
-  uv-vscode-cache:
-    driver: local
