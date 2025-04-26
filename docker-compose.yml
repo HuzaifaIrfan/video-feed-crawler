@@ -5,9 +5,9 @@ services:
       context: .
       dockerfile: dockerfile
       tags:
-        - "localhost:5000/video_feed_crawler:0.1"
-
-    image: "localhost:5000/video_feed_crawler:0.1"
+        - "ghcr.io/huzaifairfan/video_feed_crawler:0.1"
+        
+    image: "ghcr.io/huzaifairfan/video_feed_crawler:0.1"
 
     environment:
       - UV_LINK_MODE=copy
