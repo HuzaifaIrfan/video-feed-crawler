@@ -12,6 +12,7 @@ services:
       - SELENIUM_URL=http://selenium_chrome:4444/wd/hub
       - MONGODB_URI=mongodb://mongodb:27017/
       - DATABASE=video_feed_crawler
+      - CELERY_BROKER_URL=redis://redis:6379/0
       
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -20,10 +21,11 @@ services:
       - uv-vscode-cache:/home/vscode/.cache/uv
       
     command: /bin/sh -c "while sleep 1000; do :; done"
-
+    
     depends_on:
       - selenium_chrome
       - mongodb
+      - redis
 
   selenium_chrome:
     image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
@@ -41,8 +43,19 @@ services:
       - mongodb:/data/db
     restart: unless-stopped 
 
+  redis:
+    container_name: redis
+    image: redis:7.4-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server
+    volumes: 
+      - redis:/data
 
 volumes:
+  redis:
+      driver: local
   mongodb:
     driver: local
   uv-vscode-cache:

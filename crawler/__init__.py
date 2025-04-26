@@ -29,7 +29,7 @@ class Crawler:
             
     def get_driver(self):
         
-        print("Get Driver")
+        # print("Get Driver")
         
         options = webdriver.ChromeOptions()
         options.add_argument("--no-sandbox")
@@ -41,7 +41,7 @@ class Crawler:
             options=options
         ) 
   
-        print("Got Driver")
+        # print("Got Driver")
         
         return driver
       
@@ -110,7 +110,7 @@ class Crawler:
                 "img":img_src,
             }
                     
-            print(video)
+            # print(video)
             
             videos.append(video)
             
