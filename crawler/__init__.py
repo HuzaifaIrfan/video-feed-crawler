@@ -74,7 +74,16 @@ class Crawler:
                 driver.quit()
         
         return body
+
+    def get_videos(self, url:str, site:int=0) -> list:
+        match site:
+            case 0:
+                print("Getting Videos from YT")
+                return self.get_yt_videos(url)
+            case _:
+                print("Got Invalid Site")
         
+        return []
 
     def get_yt_videos(self, url:str) -> list:
         

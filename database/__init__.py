@@ -87,17 +87,17 @@ class Database:
         
     
 
-    def insert_page(self,title:str,link:str,site:int=0,cat:int=0):
+    def insert_page(self,title:str,url:str,site:int=0,cat:int=0):
         
         if not title:
             return None
         
-        if not link:
+        if not url:
             return None
         
         page={
             "title":title,
-            "link":link,
+            "url":url,
             "site":site,
             "cat":cat
         }
@@ -138,6 +138,13 @@ class Database:
         
         return video_id
 
+    def get_pages(self,cat:int=0):
+        results = self.pages_collection.find(
+        {"cat": cat}        # filter: where category == your_category_name
+        ).sort(
+        "created_at", -1               # sort: newest first (-1 = DESCENDING)
+        ).limit(10)
+        return results
 
 if __name__ == "__main__":
     database=Database()
