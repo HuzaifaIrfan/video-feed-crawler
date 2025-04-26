@@ -20,12 +20,12 @@ app = Celery('video_feed_crawler', broker=CELERY_BROKER_URL,backend=CELERY_BROKE
 
 
 # Manually import tasks
-import tasks.math_tasks
+import tasks.crawler_tasks
 
 app.conf.beat_schedule = {
-    'run-every-1-minute': {
-        'task': 'tasks.math_tasks.print_time',
-        'schedule': 6.0,  # every 60 seconds
+    'crawl-pages-every-1-minute': {
+        'task': 'tasks.crawler_tasks.crawl_pages',
+        'schedule': 60.0,  # every 60 seconds
     },
 }
 app.conf.timezone = 'UTC'
