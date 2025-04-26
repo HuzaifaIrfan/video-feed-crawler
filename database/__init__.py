@@ -76,6 +76,11 @@ class Database:
         
         return self.videos_collection
     
+    def clean_videos(self):
+        
+        self.videos_collection.drop()      
+        self.videos_collection=self.get_videos_collection()
+        
     def clean(self):
         
         self.pages_collection.drop()
