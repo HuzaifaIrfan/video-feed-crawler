@@ -6,7 +6,7 @@ on:
       - prod  # You can change this to the branch you want to target
 
 jobs:
-  build-and-test:
+  build-test-and-push:
     runs-on: ubuntu-latest
 
     steps:
