@@ -11,6 +11,39 @@ def test_crawl_and_insert_list():
     Database().clean()
     
     pages_test=[
+        # {
+        #     "title":"NetworkChuck",
+        #     "url":"https://www.youtube.com/@NetworkChuck/videos",
+        # },
+        # {
+        #     "title":"ThePrimeTimeagen",
+        #     "url":"https://www.youtube.com/@ThePrimeTimeagen/videos",
+        # },
+        # {
+        #     "title":"TravisMedia",
+        #     "url":"https://www.youtube.com/@TravisMedia/videos",
+        # },
+                        
+        # {
+        #     "title":"TheCodingSloth",
+        #     "url":"https://www.youtube.com/@TheCodingSloth/videos",
+        # },
+                                
+        # {
+        #     "title":"TechWorldwithNana",
+        #     "url":"https://www.youtube.com/@TechWorldwithNana/videos",
+        # },
+                                        
+        # {
+        #     "title":"Fireship",
+        #     "url":"https://www.youtube.com/@Fireship/videos",
+        # },
+                                                
+        # {
+        #     "title":"IBMTechnology",
+        #     "url":"https://www.youtube.com/@IBMTechnology/videos",
+        # },
+                                                        
         {
             "title":"Computerphile",
             "url":"https://www.youtube.com/@Computerphile/videos",

@@ -36,7 +36,7 @@ services:
     shm_size: "2g"
 
   mongodb:
-    container_name: mongodb-dev
+    container_name: mongodb-crawler-dev
     image: mongo:8-noble
     ports:
       - '27017:27017'
