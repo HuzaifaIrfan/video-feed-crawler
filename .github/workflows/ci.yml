@@ -1,0 +1,38 @@
+name: CI Workflow
+
+on:
+  pull_request:
+    branches:
+      - prod  # You can change this to the branch you want to target
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Build Docker images using Docker Compose
+      run: |
+        docker-compose -f docker-compose.yml build
+
+    - name: Run tests with Docker Compose
+      run: |
+        docker-compose -f docker-compose.yml up --no-start
+        docker-compose -f docker-compose.yml run --rm video_feed_crawler uv run pytest
+        docker-compose -f docker-compose.yml down
+
+    - name: Clean up Docker
+      run: docker system prune -f
