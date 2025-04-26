@@ -26,13 +26,13 @@ jobs:
 
     - name: Build Docker images using Docker Compose
       run: |
-        docker-compose -f docker-compose.yml build
+        docker compose build
 
     - name: Run tests with Docker Compose
       run: |
-        docker-compose -f docker-compose.yml up --no-start
-        docker-compose -f docker-compose.yml run --rm video_feed_crawler uv run pytest
-        docker-compose -f docker-compose.yml down
+        docker compose up --no-start
+        docker compose run --rm video_feed_crawler uv run pytest
+        docker compose down
 
     - name: Clean up Docker
       run: docker system prune -f
