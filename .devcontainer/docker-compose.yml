@@ -1,5 +1,5 @@
 services:
-  video_feed_crawler-dev:
+  video_feed_crawler:
     container_name: video_feed_crawler-dev
     build:
       context: .
@@ -28,6 +28,7 @@ services:
       - redis
 
   selenium_chrome:
+    container_name: selenium_chrome-dev
     image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
     ports:
       - "4444:4444"
@@ -35,7 +36,7 @@ services:
     shm_size: "2g"
 
   mongodb:
-    container_name: mongodb
+    container_name: mongodb-dev
     image: mongo:8-noble
     ports:
       - '27017:27017'
@@ -44,7 +45,7 @@ services:
     restart: unless-stopped 
 
   redis:
-    container_name: redis
+    container_name: redis-dev
     image: redis:7.4-alpine
     restart: always
     ports:
@@ -55,7 +56,7 @@ services:
 
 volumes:
   redis:
-      driver: local
+    driver: local
   mongodb:
     driver: local
   uv-vscode-cache:

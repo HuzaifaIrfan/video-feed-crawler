@@ -5,8 +5,60 @@ services:
       context: .
       dockerfile: dockerfile
       tags:
-        - "localhost:5000/video_feed_crawler:1.0"
+        - "localhost:5000/video_feed_crawler:0.1"
 
-    image: "localhost:5000/video_feed_crawler:1.0"
+    image: "localhost:5000/video_feed_crawler:0.1"
 
-    command: uv run main.py
+    environment:
+      - UV_LINK_MODE=copy
+      - SELENIUM_URL=http://selenium_chrome:4444/wd/hub
+      - MONGODB_URI=mongodb://mongodb:27017/
+      - DATABASE=video_feed_crawler
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      
+      
+    command: >
+      sh -c "celery -A celery_app beat --loglevel=info & 
+             celery -A celery_app worker --loglevel=info"
+
+    restart: unless-stopped
+
+    depends_on:
+      - selenium_chrome
+      - mongodb
+      - redis
+
+  selenium_chrome:
+    container_name: selenium_chrome
+    image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: "2g"
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:8-noble
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
+    restart: unless-stopped 
+
+  redis:
+    container_name: redis
+    image: redis:7.4-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server
+    volumes: 
+      - redis:/data
+
+volumes:
+  redis:
+    driver: local
+  mongodb:
+    driver: local
+  uv-vscode-cache:
+    driver: local
