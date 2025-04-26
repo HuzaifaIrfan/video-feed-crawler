@@ -11,21 +11,13 @@ def test_crawl_and_insert_list():
     Database().clean()
     
     pages_test=[
-        # {
-        #     "title":"Thewideside",
-        #     "url":"https://www.youtube.com/@Thewideside/videos"
-        # },
-        # {
-        #     "title":"WildlensbyAbrar",
-        #     "url":"https://www.youtube.com/@WildlensbyAbrar/videos",
-        # },
-        # {
-        #     "title":"Computerphile",
-        #     "url":"https://www.youtube.com/@Computerphile/videos",
-        # },
         {
-            "title":"EonUpdates",
-            "url":"https://www.youtube.com/@EonUpdates/videos"
+            "title":"Computerphile",
+            "url":"https://www.youtube.com/@Computerphile/videos",
+        },
+        {
+            "title":"Hussein Nasser",
+            "url":"https://www.youtube.com/@hnasr/videos"
         }
     ]
     
