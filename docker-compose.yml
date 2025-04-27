@@ -8,6 +8,7 @@ services:
         - "ghcr.io/huzaifairfan/video_feed_crawler:0.1"
         
     image: "ghcr.io/huzaifairfan/video_feed_crawler:0.1"
+    restart: unless-stopped
 
     environment:
       - UV_LINK_MODE=copy
@@ -21,34 +22,36 @@ services:
       sh -c "celery -A celery_app beat --loglevel=info & 
              celery -A celery_app worker --loglevel=info"
 
-    restart: unless-stopped
-
     depends_on:
       - selenium_chrome
       - mongodb
       - redis
 
+  mongodb:
+    container_name: mongodb
+    image: mongo:8-noble
+    restart: unless-stopped
+    
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
+
   selenium_chrome:
     container_name: selenium_chrome
     image: selenium/standalone-chrome:130.0-chromedriver-130.0-20250414
+    restart: unless-stopped
+
     ports:
       - "4444:4444"
       - "7900:7900"
     shm_size: "2g"
 
-  mongodb:
-    container_name: mongodb
-    image: mongo:8-noble
-    ports:
-      - '27017:27017'
-    volumes:
-      - mongodb:/data/db
-    restart: unless-stopped 
-
   redis:
     container_name: redis
     image: redis:7.4-alpine
-    restart: always
+    restart: unless-stopped
+    
     ports:
       - '6379:6379'
     command: redis-server
