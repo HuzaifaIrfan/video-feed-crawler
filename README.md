@@ -1,4 +1,3 @@
-<br />
 
 <div align="center">
   <h1>Video Feed Crawler</h1>
@@ -8,6 +7,9 @@
 
 •
 <hr>
+
+# 🛠️ Development
+
 ## Setup
 
 - Ubuntu 24.04
@@ -18,6 +20,8 @@
 
 - Use VS Code Dev Container
 - Environment Setup is given in [.devcontainer/docker-compose.yml](.devcontainer/docker-compose.yml)
+
+# 🚀 Usage
 
 ## Install Libs
 
@@ -65,15 +69,16 @@ docker compose run --rm video_feed_crawler uv run pytest
 docker compose down
 ```
 
-## 🤝🏻 &nbsp;Connect with Me
+# 📝 Documentation
 
-<p align="center">
-<a href="https://www.huzaifairfan.com"><img src="https://img.shields.io/badge/-huzaifairfan.com-1aa260?style=flat&logo=Google-Chrome&logoColor=white"/></a>
-<a href="https://www.linkedin.com/in/huzaifairfan/"><img src="https://img.shields.io/badge/-Huzaifa%20Irfan-0072b1?style=flat&logo=Linkedin&logoColor=white"/></a>
-<a href="https://github.com/HuzaifaIrfan/"><img src="https://img.shields.io/badge/-Huzaifa%20Irfan-4078c0?style=flat&logo=Github&logoColor=white"/></a>
-<a href="mailto:contact@huzaifairfan.com"><img src="https://img.shields.io/badge/-contact@huzaifairfan.com-c71610?style=flat&logo=Gmail&logoColor=white"/></a>
-</p>
+# 📚 References
 
-## License
 
-Licensed under the MIT License, Copyright 2025 Huzaifa Irfan. [LICENSE](LICENSE)
+# 🤝🏻 Connect with Me
+
+[![GitHub](https://img.shields.io/badge/Github-%23222.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HuzaifaIrfan/)
+[![Website](https://img.shields.io/badge/Website-%23222.svg?style=for-the-badge&logo=google-chrome&logoColor==%234285F4)](https://www.huzaifairfan.com)
+
+# 📜 License
+
+Licensed under the GPL3 License, Copyright 2025 Huzaifa Irfan. [LICENSE](LICENSE)
